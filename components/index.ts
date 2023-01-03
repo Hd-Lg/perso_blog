@@ -6,8 +6,10 @@ import PreviewSuspense from "./PreviewSuspense";
 import PreviewBlogList from "./PreviewBlogList";
 import BlogList from "./BlogList";
 import ClientSideRoute from "./ClientSideRoute";
+import { RichTextComponent } from "./RichTextComponent";
 
 export {
+	RichTextComponent,
 	Logo,
 	StudioNavbar,
 	Header,
