@@ -11,6 +11,23 @@ type Props = {
 	};
 };
 
+// Check all the slugs that exist and populate all the pages at built time with revalidation of the static page every X seconds.
+
+export const revalidate = 60;
+
+export const generateStaticParams = async () => {
+	const query = groq`*[type=='post']{
+		slug
+	}`;
+	// Query the backend to get all the posts
+	const slugs: Post[] = await client.fetch(query);
+	const slugRoutes = slugs.map((slug) => slug.slug.current);
+
+	return slugRoutes.map((slug) => ({
+		slug,
+	}));
+};
+
 const Post = async ({ params: { slug } }: Props) => {
 	const query = groq`
         *[_type=='post' && slug.current==$slug][0] {
